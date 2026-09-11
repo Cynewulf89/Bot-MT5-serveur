@@ -24,6 +24,12 @@ if [ ! -f "$MT5_PATH" ]; then
     sleep 30
 fi
 
+# Copie automatique de l'Expert Advisor SpotHYPE_Gold dans le terminal MT5
+MQL5_EXPERTS_DIR="/root/.wine/drive_c/Program Files/MetaTrader 5/MQL5/Experts"
+if [ -d "$MQL5_EXPERTS_DIR" ] && [ -d "/root/Experts" ]; then
+    cp -u /root/Experts/* "$MQL5_EXPERTS_DIR/" 2>/dev/null || true
+fi
+
 # Lancement du terminal MT5
 if [ -f "$MT5_PATH" ]; then
     echo "Démarrage de MetaTrader 5..."

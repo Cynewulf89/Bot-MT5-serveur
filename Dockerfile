@@ -31,7 +31,10 @@ RUN dpkg --add-architecture i386 && \
 WORKDIR /root
 RUN wget -q -O mt5setup.exe https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe
 
-# 3. Script de démarrage de l'environnement MT5 + VNC Web
+# 3. Copie des Experts Advisors (SpotHYPE_Gold)
+COPY Experts /root/Experts
+
+# 4. Script de démarrage de l'environnement MT5 + VNC Web
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
