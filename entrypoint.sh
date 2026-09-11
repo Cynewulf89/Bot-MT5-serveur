@@ -30,10 +30,10 @@ if [ -d "$MQL5_EXPERTS_DIR" ] && [ -d "/root/Experts" ]; then
     cp -u /root/Experts/* "$MQL5_EXPERTS_DIR/" 2>/dev/null || true
 fi
 
-# Lancement du terminal MT5
+# Lancement du terminal MT5 en mode standard (non-portable pour charger les serveurs en ligne)
 if [ -f "$MT5_PATH" ]; then
     echo "Démarrage de MetaTrader 5..."
-    wine "$MT5_PATH" /portable &
+    wine "$MT5_PATH" &
 else
     echo "Terminal MT5 introuvable, relance de l'installateur..."
     wine /root/mt5setup.exe /auto &
