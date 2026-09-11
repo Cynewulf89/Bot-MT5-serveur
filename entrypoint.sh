@@ -39,5 +39,17 @@ else
     wine /root/mt5setup.exe /auto &
 fi
 
-# Maintien du conteneur en vie et journalisation
-tail -f /dev/null
+# Streaming en continu des journaux MT5 (Trades & Experts) vers la sortie console Docker (Coolify)
+LOGS_DIR="/root/.wine/drive_c/users/root/AppData/Roaming/MetaQuotes/Terminal"
+echo "En attente de la génération des logs MT5..."
+sleep 5
+
+while true; do
+    # Trouve le dossier de logs le plus récent et le stream vers stdout
+    LATEST_LOG=$(find "$LOGS_DIR" -name "*.log" 2>/dev/null | sort -r | head -n 1)
+    if [ -n "$LATEST_LOG" ]; then
+        echo "=== Suivi des logs MT5 en direct : $LATEST_LOG ==="
+        tail -F -n 50 "$LOGS_DIR"/*/*/*.log 2>/dev/null
+    fi
+    sleep 5
+done
