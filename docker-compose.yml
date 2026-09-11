@@ -1,0 +1,13 @@
+services:
+  mt5-server:
+    build: .
+    container_name: mt5-server
+    restart: always
+    ports:
+      - "6080:6080" # Interface Web noVNC (http://localhost:6080/vnc.html)
+      - "5900:5900" # Client VNC direct
+      - "18812:18812" # Port Bridge Python mt5linux
+    volumes:
+      - ./data/wine:/root/.wine
+    environment:
+      - WINEDEBUG=-all
